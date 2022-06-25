@@ -1,0 +1,60 @@
+.mon {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container {
+    width: 1000px;
+    margin-top: 20px;
+}
+
+.title {
+    padding: 10px 0px 3px 0px;
+    margin-bottom: 10px;
+    border-bottom: 3px solid rgb(32, 59, 135);
+}
+
+.dot {
+    height: 40px;
+    width: 40px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 2px 10px 2px 2px;
+}
+
+.memberItem{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.btItem:hover{
+    box-shadow: 2px 2px 5px black;
+}
+
+.btItem{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid rgb(32, 59, 135);
+    border-radius: 5px; 
+    padding: 7px;
+}
+
+.btItem h4, .nav-item, .card-header {
+    cursor: pointer;
+}
+
+.btItem h4 {
+    color:rgb(32, 59, 135);
+}
+
+#userName ,.navbar-nav .nav-item .nav-link{
+    color: white !important;
+}
+
+#tab-detail {
+    color: black;
+}
+
