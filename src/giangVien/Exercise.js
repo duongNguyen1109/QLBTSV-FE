@@ -90,7 +90,7 @@ export default function Exercise(props) {
                         <p>Tuyệt vời , không có bài tập nào sắp đến hạn</p>
                         <button className='btn btn-link' style={{ color: 'black' }}>Xem tất cả</button>
                     </div>
-                    <button className='btn' onClick={() => handleShow()} style={{ backgroundColor: 'rgb(32, 59, 135)', color: 'white', marginTop: '5px' }}>Tạo bài tập</button>
+                    {(localStorage.getItem("user") === "gv") ? <button className='btn' onClick={() => handleShow()} style={{ backgroundColor: 'rgb(32, 59, 135)', color: 'white', marginTop: '5px' }}>Tạo bài tập</button> : ""}
                 </div>
                 <div className='col-sm-9 d-flex flex-column'>
                     {listBT.map((item) => (
@@ -145,7 +145,7 @@ export default function Exercise(props) {
 function ExerciseItem(props) {
     const [open, setOpen] = useState();
     const [key, setKey] = useState('detail');
-    const [bt,setBT] = useState(props.bt);
+    const [bt, setBT] = useState(props.bt);
     let navigate = useNavigate();
 
     // function closeModal() {
@@ -197,7 +197,13 @@ function ExerciseItem(props) {
 
 
     return (
-        <div className='btItem' onClick={() => {navigate("/giangvien/baiTap/" + props.bt.maBT);}}>
+        <div className='btItem' onClick={() => {
+            if (localStorage.getItem("user") === "gv") {
+                navigate("/giangvien/baiTap/" + props.bt.maBT);
+            }else{
+                navigate("/sinhvien/baiTap/" + props.bt.maBT);
+            }
+        }}>
             <span className='dot'></span>
             <div>
                 <h4>{bt.tenBT}</h4>

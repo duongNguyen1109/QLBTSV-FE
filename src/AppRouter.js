@@ -12,6 +12,8 @@ import ListTK from "./admin/pages/ListTK";
 import ListMon from "./admin/pages/ListMon";
 import ListLop from "./admin/pages/ListLop";
 import AddSV from "./admin/components/AddSV";
+import SvHome from "./sinhVien/SvHome.js";
+import ExcerciseDetailSV from "./sinhVien/exerciseDetailSV.js";
 
 
 
@@ -29,16 +31,21 @@ export default function AppRouter() {
                     <Route path='mon/:maMon' element={<ListMon />} />
                     <Route path='lop/addSV/:maLop' element={<AddSV />} />
                 </Route>
+
                 <Route path="/sinhvien" element={
                     (localStorage.getItem("user") === "sv") ? <SinhVien /> : <Navigate replace to="/" />
                 }>
+                    <Route path="" element={<SvHome />}></Route>
+                    <Route path="lop/:tenLop/:maLop/:maGV" element={<Classroom />}></Route>
+                    <Route path="baiTap/:maBaiTap" element={<ExcerciseDetailSV />}></Route>
                 </Route>
+
                 <Route path="/giangvien" element={
                     (localStorage.getItem("user") === "gv") ? <GiangVien /> : <Navigate replace to="/" />
                 }>
                     <Route path="" element={<GvHome />}></Route>
                     <Route path="lop/:tenLop/:maLop/:maMon" element={<Classroom />}></Route>
-                    <Route path="baitap/:maBaiTap" element={<ExcerciseDetail />}></Route>
+                    <Route path="baiTap/:maBaiTap" element={<ExcerciseDetail />}></Route>
                 </Route>
                 <Route exact path="/" element={<Login />}>
                 </Route>
@@ -57,21 +64,56 @@ function Admin() {
         <div className='App'>
             <Header/>
             <ToastContainer />
-            {/* <button onClick={logout}>Logout</button> */}
             <Outlet />
         </div>
     )
 }
 
 function SinhVien() {
+    let {tenLop} = useParams();
+    const [userInfo, setUserInfo] = useState([]);
+    const [tab, setTab] = useState('');
+    useEffect(() => {
+        axios.get(`http://localhost:8080/api/taiKhoan/` + localStorage.getItem("id"))
+            .then(response => {
+                setUserInfo(response.data[0]);
+            });
+    }, []);
+
     let history = useNavigate();
     const logout = () => {
         localStorage.removeItem("user");
         history("/");
     }
     return (
-        <div><h2>Sinh vien</h2>
-            <button onClick={logout}>Logout</button>
+        <div>
+            <nav class="navbar navbar-expand-sm" style={{ backgroundColor: 'rgb(32, 59, 135)' }}>
+                <div class="container-fluid">
+                    <a class="navbar-brand" style={{ color: 'white' }}>{tenLop ? `Lớp ${tenLop}` : 'Quản lý bài tập sinh viên - Khoa đa phương tiện'}</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="mynavbar">
+                        {tenLop ? <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" onClick={() => setTab(0)}>Bài tập</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onClick={() => setTab(1)}>Thành viên</a>
+                            </li>
+                        </ul> : <ul class="navbar-nav me-auto"></ul>}
+
+                        <NavDropdown
+                            title={userInfo.hoTen}
+                            menuVariant="light"
+                            id="userName"
+                        >
+                            <NavDropdown.Item onClick={logout}>Đăng xuất</NavDropdown.Item>
+                        </NavDropdown>
+                    </div>
+                </div>
+            </nav>
+            <Outlet context={[tab, setTab]} />
         </div>
     )
 }

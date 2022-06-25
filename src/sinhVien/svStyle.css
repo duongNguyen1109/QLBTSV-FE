@@ -1,0 +1,9 @@
+.mon {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container {
+    width: 1000px;
+    margin-top: 20px;
+}

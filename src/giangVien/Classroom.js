@@ -12,7 +12,7 @@ import { render } from '@testing-library/react';
 import { Dropdown, DropdownButton, NavDropdown } from 'react-bootstrap';
 
 export default function Classroom() {
-    let { tenLop, maLop, maMon} = useParams();
+    let { tenLop, maLop, maMon, maGV} = useParams();
     const [tab, setTab] = useOutletContext(0);
     const [userInfo, setUserInfo] = useState([]);
 
@@ -33,7 +33,7 @@ export default function Classroom() {
     const renderTab = () => {
         switch (tab) {
             case 0: return (<Exercise name={tenLop} maLop={maLop} />);
-            case 1: return (<Member maLop={maLop} name={userInfo.hoTen} />);
+            case 1: return (<Member maLop={maLop} name={userInfo.hoTen} maGV = {maGV} />);
             case 2: return (<Group maLop = {maLop} maMon = {maMon}/>);
         }
     }
