@@ -29,7 +29,7 @@ const ListMon = () => {
             const response = await axios.delete(`http://localhost:8080/api/monHoc/${maMon}`);
             if (response.status === 200) {
                 toast.success(`Đã xóa tài khoản ${name}`, { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
-                navigate(`/mon`);
+                navigate(`/admin/mon`);
                 setTimeout(() => {
                     window.location.reload();
                 }, 1500);
@@ -57,7 +57,7 @@ const ListMon = () => {
                         {data && data.map((item, index) => {
                             return (
                                 <tr key={item.maMon} onClick={() => {
-                                    navigate(`/mon/${item.maMon}`);
+                                    navigate(`/admin/mon/${item.maMon}`);
                                 }}>
                                     <th scope="row">{index + 1}</th>
                                     <td>{item.maMon}</td>

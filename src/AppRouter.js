@@ -14,6 +14,7 @@ import ListLop from "./admin/pages/ListLop";
 import AddSV from "./admin/components/AddSV";
 import SvHome from "./sinhVien/SvHome.js";
 import ExcerciseDetailSV from "./sinhVien/exerciseDetailSV.js";
+import ListSV from "./admin/components/ListSV.js";
 
 
 
@@ -29,6 +30,7 @@ export default function AppRouter() {
                     <Route exact path="lop" element={<ListLop />} />
                     <Route path="taiKhoan/:ma" element={<ListTK />} />
                     <Route path='mon/:maMon' element={<ListMon />} />
+                    <Route path='lop/listSV/:maLop' element={<ListSV />} />
                     <Route path='lop/addSV/:maLop' element={<AddSV />} />
                 </Route>
 

@@ -58,7 +58,7 @@ const AddTK = () => {
         const response = await axios.put(`http://localhost:8080/api/taiKhoan/${ma}`, data);
             if (response.status === 200) {
                 toast.success('Cập nhật thành công', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
-                navigate(`/taiKhoan`);
+                navigate(`/admin/taiKhoan`);
                 setState(initialState);
             }
     };

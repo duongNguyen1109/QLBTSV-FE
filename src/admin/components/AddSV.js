@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate, useParams  } from 'react-router-dom';
 import * as XLSX from 'xlsx';
 import axios from "axios";
-import { toast } from "react-toastify";
+import {toast} from 'react-toastify';
 
 
 

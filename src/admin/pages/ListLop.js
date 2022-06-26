@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../style/ListTK.css';
+import '../style/ListLop.css';
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import AddLop from "../components/AddLop";
@@ -66,6 +66,7 @@ const ListLop = () => {
                                     <td>{item.hoTen}</td>
                                     <td>{item.tenMon}</td>
                                     <td>
+                                        <button className="btn btn-view" onClick={() => navigate(`/admin/lop/listSV/${item.maLop}`)}>Chi tiết</button>
                                         <button className="btn btn-add" onClick={() => navigate(`/admin/lop/addSV/${item.maLop}`)}>Thêm</button>
                                         <button className="btn btn-delete" onClick={() => onDelete(item.maLop, item.tenLop)}>Xóa</button>
                                     </td>

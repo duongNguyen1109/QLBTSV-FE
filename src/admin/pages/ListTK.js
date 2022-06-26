@@ -41,7 +41,7 @@ const ListTK = () => {
             const response = await axios.delete(`http://localhost:8080/api/taiKhoan/${ma}`);
             if (response.status === 200) {
                 toast.success(`Đã xóa tài khoản ${name}`, { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
-                navigate(`/taiKhoan`);
+                navigate(`/admin/taiKhoan`);
                 setTimeout(() => {
                     window.location.reload();
                 }, 1500);
@@ -89,7 +89,7 @@ const ListTK = () => {
                         {data && data.map((item, index) => {
                             return (
                                 <tr key={item.ma} onClick={() => {
-                                    navigate(`/taiKhoan/${item.ma}`);
+                                    navigate(`/admin/taiKhoan/${item.ma}`);
                                 }}>
                                     <th scope="row">{index + 1}</th>
                                     <td>{item.ma}</td>
