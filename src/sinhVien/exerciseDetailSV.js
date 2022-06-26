@@ -13,7 +13,7 @@ export default function ExcerciseDetailSV() {
         console.log(baiTap);
     }, [])
     return (
-        <div className="container">
+        <div className="container mt-3">
             <div className="mb-3 d-flex justify-content-between align-items-end" style={{ borderBottom: 'solid 1px black' }}>
                 <div>
                     <h2>{baiTap.tenBT}</h2>
@@ -23,10 +23,10 @@ export default function ExcerciseDetailSV() {
                     <p><b>Hạn nộp: </b><span>{baiTap.hanNop}</span></p>
                 </div>
             </div>
-            <div className = "mb-3" style={{ borderBottom: 'solid 1px black' }}>
+            <div className="mb-3" style={{ borderBottom: 'solid 1px black' }}>
                 <p>{baiTap.moTa ? baiTap.moTa : 'Bài tập này hiện chưa có mô tả'}</p>
             </div>
-            <button className = "btn btn-primary">Nộp bài</button>
+            <button className="btn btn-primary">Nộp bài</button>
         </div>
     )
 }

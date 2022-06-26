@@ -26,7 +26,7 @@ export default function Member(props) {
     }, [])
 
     return (
-        <div className='container'>
+        <div className='container mt-3'>
             <div className="title">
                 <h3>Giảng viên</h3>
             </div>

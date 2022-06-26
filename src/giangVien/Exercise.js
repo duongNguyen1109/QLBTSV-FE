@@ -79,7 +79,7 @@ export default function Exercise(props) {
     }
 
     return (
-        <div className='container'>
+        <div className='container mt-3'>
             <div style={{ height: '200px', backgroundColor: 'skyblue', borderRadius: '1em', paddingTop: '150px', paddingLeft: '20px' }}>
                 <h3 style={{ color: 'white' }}>{props.name}</h3>
             </div>
@@ -200,7 +200,7 @@ function ExerciseItem(props) {
         <div className='btItem' onClick={() => {
             if (localStorage.getItem("user") === "gv") {
                 navigate("/giangvien/baiTap/" + props.bt.maBT);
-            }else{
+            } else {
                 navigate("/sinhvien/baiTap/" + props.bt.maBT);
             }
         }}>

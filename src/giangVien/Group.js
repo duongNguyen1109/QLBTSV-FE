@@ -5,7 +5,7 @@ import { MonItem } from "./monItem";
 import "./gvStyle.css";
 import axios from 'axios';
 import { InputGroup, Button, Modal, Form } from 'react-bootstrap';
-import { Autocomplete, Avatar, Chip, MenuItem, Select, TextField, InputLabel, FormControl} from '@mui/material';
+import { Autocomplete, Avatar, Chip, MenuItem, Select, TextField, InputLabel, FormControl } from '@mui/material';
 import { Face } from '@mui/icons-material';
 
 import { OutTable, ExcelRenderer } from 'react-excel-renderer';
@@ -59,8 +59,8 @@ export default function Group(props) {
         }).then(res => {
             console.log(res);
         });
-        
-        if(value.length > 0){
+
+        if (value.length > 0) {
             value.forEach(element => {
                 axios.post('http://localhost:8080/api/svNhom', {
                     maLop: props.maLop,
@@ -98,7 +98,7 @@ export default function Group(props) {
         console.log(value);
         console.log(tenNhom);
         console.log(sttUpdate);
-        
+
         axios.put('http://localhost:8080/api/nhomBT', {
             maLop: props.maLop,
             sttNhom: sttUpdate,
@@ -108,7 +108,7 @@ export default function Group(props) {
             console.log(res);
         });
 
-        if(value.length > 0){
+        if (value.length > 0) {
             value.forEach(element => {
                 axios.post('http://localhost:8080/api/svNhom', {
                     maLop: props.maLop,
@@ -120,7 +120,7 @@ export default function Group(props) {
                 });
             });
         }
-        
+
         closeModalUpdate();
         initData();
     }
@@ -142,11 +142,11 @@ export default function Group(props) {
                         </div>
                         <div className='card-body'>
                             {item1.sv.map(item => (
-                                <Chip className='mb-3' icon={<Face></Face>} label={`${item.hoTen} - ${item.maSV}`} onDelete={() => deleteSV(item.maSV, item1.sttNhom, props.maLop)} key = {item.maSV}></Chip>
+                                <Chip className='mb-3' icon={<Face></Face>} label={`${item.hoTen} - ${item.maSV}`} onDelete={() => deleteSV(item.maSV, item1.sttNhom, props.maLop)} key={item.maSV}></Chip>
                             ))}
                         </div>
                         <div className='card-footer'>
-                            {item1.tenTopic ? item1.tenTopic : 'Chưa có topic' }
+                            {item1.tenTopic ? item1.tenTopic : 'Chưa có topic'}
                         </div>
                     </div>
                 ))}
@@ -185,7 +185,7 @@ export default function Group(props) {
     }
 
     return (
-        <div className='container'>
+        <div className='container mt-3'>
             <Button variant='primary' onClick={() => setShow(true)}>Tạo 1 nhóm</Button>
             <input type="file" onChange={fileHandle} style={{ "padding": "10px" }} />
             {renderGroups()}
@@ -221,7 +221,7 @@ export default function Group(props) {
                             onChange={(e) => setTopic(e.target.value)}
                         >
                             {topicList.map(item => (
-                                <MenuItem value = {item.idTopic}>{item.ten}</MenuItem>
+                                <MenuItem value={item.idTopic}>{item.ten}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>
@@ -260,7 +260,7 @@ export default function Group(props) {
                             onChange={(e) => setTopic(e.target.value)}
                         >
                             {topicList.map(item => (
-                                <MenuItem value = {item.idTopic}>{item.ten}</MenuItem>
+                                <MenuItem value={item.idTopic}>{item.ten}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>
