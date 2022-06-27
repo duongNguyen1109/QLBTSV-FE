@@ -96,7 +96,7 @@ const AddMon = () => {
         <div className="container">
             <div className="labelAdd"><h4>Thêm mới môn học</h4></div>
             <form onSubmit={handleSubmit} >
-                <div className="row justify-content-between">
+                <div className="row row-padding justify-content-between">
                     <div className="col-6">
                         <label className="col-sm-8 label" htmlFor="maMon">Mã</label>
                         <input className="col-sm-8" type="text" id="maMon" name="maMon" placeholder="Nhap ma mon" onChange={handleInputChange} value={state.maMon} />
@@ -107,9 +107,9 @@ const AddMon = () => {
                         <input className="col-sm-8" type="text" id="tenMon" name="tenMon" placeholder="Nhap ten mon" onChange={handleInputChange} value={state.tenMon} />
                     </div>
 
-                    <div className="row justify-content-evenly">
+                    <div className="row row-padding justify-content-evenly">
                         <div className="col-sm-6">
-                            <div className="row">
+                            <div className="row row-padding">
                                 <input type="submit" value={maMon ? "Cập nhập" : "Thêm"} />
                             </div>
                         </div>

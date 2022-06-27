@@ -1,14 +1,13 @@
-.container{
+.container.addTK{
     margin: auto;
     padding-top: 30px;
     border-bottom-style: solid;
     border-bottom-width: 2px;
     border-bottom-color: rgb(204, 204, 204);
     padding-bottom: 30px;
-    
 }
 
-.row {
+.row-padding {
     padding-top: 10px;
 }
 
