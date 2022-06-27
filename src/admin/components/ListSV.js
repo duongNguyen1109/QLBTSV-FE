@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../style/ListTK.css';
+import '../style/ListSV.css';
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import { toast } from "react-toastify";
@@ -24,7 +24,7 @@ const ListSV = () => {
 
     const onDelete = async (maSV, name) => {
 
-        if (window.confirm(`Bạn có muốn xóa tài khoản ${name} không?`)) {
+        if (window.confirm(`Bạn có muốn xóa sinh viên ${name} khỏi lớp không?`)) {
             // let dataSV = {
             //     maLop: Number(maLop),
             //     maSV: maSV
@@ -38,7 +38,7 @@ const ListSV = () => {
             });
             console.log(response);
             if (response.status === 200) {
-                toast.success(`Đã xóa tài khoản ${name}`, { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
+                toast.success(`Đã xóa sinh viên ${name}`, { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
                 navigate(`/admin/lop/listSV/${maLop}`);
                 setTimeout(() => {
                     window.location.reload();

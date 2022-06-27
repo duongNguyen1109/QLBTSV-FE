@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../style/ListTK.css';
+import '../style/ListMon.css';
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import AddMon from "../components/AddMon";
