@@ -28,7 +28,7 @@ const ListLop = () => {
         if (window.confirm(`Bạn có muốn xóa lớp ${name} không?`)) {
             const response = await axios.delete(`http://localhost:8080/api/lopHoc/${maLop}`);
             if (response.status === 200) {
-                toast.success(`Đã xóa tài khoản ${name}`, { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
+                toast.success(`Đã xóa lớp ${name}`, { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
                 setTimeout(() => {
                     window.location.reload();
                 }, 1500);

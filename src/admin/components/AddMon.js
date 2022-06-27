@@ -52,7 +52,7 @@ const AddMon = () => {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         let check = 1;
 
@@ -62,6 +62,13 @@ const AddMon = () => {
                     toast.error('Mã môn phải ít hơn 10 ký tự', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
                     check = 0;
                 }
+
+                const a = await axios.get(`http://localhost:8080/api/monHoc/${state[key]}`);
+                if(a.data.length > 0) {
+                    toast.error('Đã tồn tại mã môn', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
+                    check = 0;
+                }
+
             } else if (key === "tenMon") {
                 if (state[key] === "") {
                     toast.error('Tên môn không được để trống', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });

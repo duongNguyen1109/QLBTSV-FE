@@ -40,7 +40,7 @@ const AddLop = () => {
     }
 
     const getGiaoVien = async () => {
-        const response = await axios.get(`http://localhost:8080/api/taiKhoanGV`);
+        const response = await axios.get(`http://localhost:8080/api/loaiTK/2`);
         if (response.status === 200){
             setGiaoVien(response.data);
         }
