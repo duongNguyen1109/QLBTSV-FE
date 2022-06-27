@@ -28,7 +28,7 @@ const ListMon = () => {
         if(window.confirm(`Bạn có muốn xóa môn ${name} không?`)){
             const response = await axios.delete(`http://localhost:8080/api/monHoc/${maMon}`);
             if (response.status === 200) {
-                toast.success(`Đã xóa tài khoản ${name}`, { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
+                toast.success(`Đã xóa môn ${name}`, { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
                 navigate(`/admin/mon`);
                 setTimeout(() => {
                     window.location.reload();
