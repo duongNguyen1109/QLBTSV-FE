@@ -63,7 +63,7 @@ const AddTK = () => {
             }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         let check = 1;
 
@@ -71,6 +71,13 @@ const AddTK = () => {
             if (key === "ma") {
                 if (state[key].length !== 10) {
                     toast.error('Mã tài khoản phải đủ 10 ký tự', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
+                    // console.log(state[key]);
+                    check = 0;
+                }
+                const a = await axios.get(`http://localhost:8080/api/taiKhoan/${state[key]}`);
+                console.log(a);
+                if(a.data.length > 0){
+                    toast.error('Tài khoản đã tồn tại', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
                     check = 0;
                 }
             } else if (key === "hoTen") {
