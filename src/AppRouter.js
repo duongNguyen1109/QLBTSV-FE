@@ -6,7 +6,7 @@ import Classroom from "./giangVien/Classroom.js";
 import axios from "axios";
 import { DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
 import ExcerciseDetail from "./giangVien/ExerciseDetail.js";
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from "./admin/components/Header.js";
 import ListTK from "./admin/pages/ListTK";
@@ -16,8 +16,6 @@ import AddSV from "./admin/components/AddSV";
 import SvHome from "./sinhVien/SvHome.js";
 import ExcerciseDetailSV from "./sinhVien/exerciseDetailSV.js";
 import ListSV from "./admin/components/ListSV.js";
-
-
 
 export default function AppRouter() {
     return (
@@ -65,7 +63,7 @@ function Admin() {
     // console.log(localStorage.getItem("admin"));
     return (
         <div className='App'>
-            <Header/>
+            <Header />
             <ToastContainer />
             <Outlet />
         </div>
@@ -73,7 +71,7 @@ function Admin() {
 }
 
 function SinhVien() {
-    let {tenLop} = useParams();
+    let { tenLop } = useParams();
     const [userInfo, setUserInfo] = useState([]);
     const [tab, setTab] = useState('');
     useEffect(() => {

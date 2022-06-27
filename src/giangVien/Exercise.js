@@ -143,8 +143,6 @@ export default function Exercise(props) {
 }
 
 function ExerciseItem(props) {
-    const [open, setOpen] = useState();
-    const [key, setKey] = useState('detail');
     const [bt, setBT] = useState(props.bt);
     let navigate = useNavigate();
 

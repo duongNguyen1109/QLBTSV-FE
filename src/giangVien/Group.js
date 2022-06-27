@@ -5,8 +5,11 @@ import { MonItem } from "./monItem";
 import "./gvStyle.css";
 import axios from 'axios';
 import { InputGroup, Button, Modal, Form } from 'react-bootstrap';
-import { Autocomplete, Avatar, Chip, MenuItem, Select, TextField, InputLabel, FormControl } from '@mui/material';
+import { Autocomplete, Avatar, Chip, MenuItem, Select, TextField, InputLabel, FormControl, List, ListItemText, FormGroup } from '@mui/material';
 import { Face } from '@mui/icons-material';
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
+import ListItem from "@mui/material/ListItem";
 
 import { OutTable, ExcelRenderer } from 'react-excel-renderer';
 
@@ -25,7 +28,10 @@ export default function Group(props) {
     const [tenNhom, setTenNhom] = useState('');
     const [sttUpdate, setsttUpdate] = useState(0);
     const [topicList, setTopicList] = useState([]);
-    const [topic, setTopic] = useState('')
+    const [topic, setTopic] = useState('');
+    const [showTopic, setShowTopic] = useState(false);
+    const [newTopic, setNewTopic] = useState('');
+    const [topicE, setTopicE] = useState(false);
 
     function initData() {
         let url = 'http://localhost:8080/api/getNhomByLop/' + props.maLop;
@@ -40,11 +46,15 @@ export default function Group(props) {
         console.log('da init');
     }
 
-    useEffect(() => {
-        initData();
+    function getTopic() {
         axios.get('http://localhost:8080/api/topicList/' + props.maMon).then(res => {
             setTopicList(res.data);
         })
+    }
+
+    useEffect(() => {
+        initData();
+        getTopic();
     }, [props.maLop])
 
     function createGroup() {
@@ -125,6 +135,36 @@ export default function Group(props) {
         initData();
     }
 
+    const addTopic = () => {
+        let check = false;
+        for (let i = 0; i < topicList.length; i++) {
+            if (topicList[i].ten === newTopic) check = true;
+        }
+
+        if (!check) {
+            axios.post('http://localhost:8080/api/topic', {
+                maMon: props.maMon,
+                ten: newTopic
+            }).then(res => {
+                if (res.status === 200) {
+                    getTopic();
+                    setNewTopic('');
+                    setTopicE(false);
+                }
+            })
+        }else{
+            setTopicE(true);
+        }
+    }
+
+     function renderTopicError(){
+        if(topicE){
+            return(
+                <span style={{color: 'red'}}>Tên topic đã tồn tại</span>
+            )
+        }
+     }
+
     const openUpdateShow = (nhomData) => {
         setUpdateShow(true);
         setTenNhom(nhomData.tenNhom);
@@ -188,7 +228,35 @@ export default function Group(props) {
         <div className='container mt-3'>
             <Button variant='primary' onClick={() => setShow(true)}>Tạo 1 nhóm</Button>
             <input type="file" onChange={fileHandle} style={{ "padding": "10px" }} />
+            <Button variant="primary" onClick={() => { setShowTopic(true); setNewTopic('') }}>Quản lý topic</Button>
             {renderGroups()}
+
+            <Modal show={showTopic} size='md' onHide={() => setShowTopic(false)} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Quản lý topic</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <FormGroup>
+                        <TextField value={newTopic} onChange={(e) => setNewTopic(e.target.value)} id="input-topic" label="Tên topic" variant="outlined"></TextField>
+                        {renderTopicError()}
+                        <Button className='mt-3' onClick={addTopic}>Thêm</Button>
+                    </FormGroup>
+                    <List>
+                        {topicList.map(item => (
+                            <ListItem
+                                key={item.idTopic}
+                                secondaryAction={
+                                    <IconButton edge="end" onClick={() => console.log(item.idTopic)}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                }>
+                                <ListItemText primary={item.ten}></ListItemText>
+                            </ListItem>
+                        )
+                        )}
+                    </List>
+                </Modal.Body>
+            </Modal>
 
             <Modal show={show} size='lg' onHide={() => closeModal()} centered>
                 <Modal.Header closeButton>

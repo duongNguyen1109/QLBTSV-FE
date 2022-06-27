@@ -58,3 +58,13 @@
     color: black;
 }
 
+.sv-number{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.sv-number h1{
+    font-size: 70px;
+}
+
