@@ -28,7 +28,7 @@
     border-bottom: 2px solid #009879;
 }
 
-.btn {
+.btn-delete, .btn-add, .btn-view  {
     border: none;
     color: white;
     padding: 5px 8px;
