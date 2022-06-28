@@ -16,6 +16,7 @@ import AddSV from "./admin/components/AddSV";
 import SvHome from "./sinhVien/SvHome.js";
 import ExcerciseDetailSV from "./sinhVien/exerciseDetailSV.js";
 import ListSV from "./admin/components/ListSV.js";
+import SVUpFile from "./sinhVien/svUpfile.js";
 
 export default function AppRouter() {
     return (
@@ -38,7 +39,8 @@ export default function AppRouter() {
                 }>
                     <Route path="" element={<SvHome />}></Route>
                     <Route path="lop/:tenLop/:maLop/:maGV" element={<Classroom />}></Route>
-                    <Route path="baiTap/:maBaiTap" element={<ExcerciseDetailSV />}></Route>
+                    <Route path="baiTap/:maBaiTap/:maLop" element={<ExcerciseDetailSV />}></Route>
+                    <Route path = ":maLop/:maBaiTap/upfile" element = {<SVUpFile />}></Route>
                 </Route>
 
                 <Route path="/giangvien" element={

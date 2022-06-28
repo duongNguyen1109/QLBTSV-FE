@@ -7,3 +7,17 @@
     width: 1000px;
     /* margin-top: 20px; */
 }
+
+.container-backgroud {
+	width: 100vw;
+	min-height: 100vh;
+	background-color: #2f3e7e;
+}
+
+.songs_container {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-gap: 15px;
+	align-items: center;
+	justify-content: center;
+}

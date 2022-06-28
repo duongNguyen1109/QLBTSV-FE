@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 export default function ExcerciseDetailSV() {
-    let { maBaiTap } = useParams();
+    let { maBaiTap, maLop } = useParams();
     const [baiTap, setBaiTap] = useState('');
+    let navigate = useNavigate();
 
     useEffect(() => {
         axios.get('http://localhost:8080/api/baiTap/' + maBaiTap).then(res => {
@@ -26,7 +27,7 @@ export default function ExcerciseDetailSV() {
             <div className="mb-3" style={{ borderBottom: 'solid 1px black' }}>
                 <p>{baiTap.moTa ? baiTap.moTa : 'Bài tập này hiện chưa có mô tả'}</p>
             </div>
-            <button className="btn btn-primary">Nộp bài</button>
+            <button className="btn btn-primary" onClick={() => navigate(`/sinhvien/${maLop}/${maBaiTap}/upfile`)}>Nộp bài</button>
         </div>
     )
 }

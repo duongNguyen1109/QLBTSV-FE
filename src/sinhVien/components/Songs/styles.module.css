@@ -1,0 +1,32 @@
+.song_container {
+	width: 300px;
+	height: 100px;
+	background-color: rgb(253, 244, 215);
+	display: flex;
+	align-items: center;
+	padding: 10px;
+	border-radius: 2px;
+	margin: 5px 0;
+}
+
+.song_img {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+}
+
+.song_info {
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
+}
+
+.song_maBT,
+.song_nguoiNop,
+.song_ngayNop,
+.song_ghiChu {
+	font-size: 16px;
+	font-weight: normal;
+	margin: 0;
+}
+
