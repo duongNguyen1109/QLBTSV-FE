@@ -165,7 +165,7 @@ function GiangVien() {
                             <ul class="navbar-nav me-auto">
                                 <li class="nav-item">
                                     <a class="nav-link" onClick={() => {
-                                        if (tabHome !== 0) {
+                                        if (location.pathname !== "/giangvien") {
                                             setTabHome(0);
                                             history("/giangvien");
                                         }
@@ -173,7 +173,7 @@ function GiangVien() {
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" onClick={() => {
-                                        if (tabHome !== 1) {
+                                        if (location.pathname !== "/giangvien/search-img") {
                                             setTabHome(1);
                                             history("/giangvien/search-img");
                                         }

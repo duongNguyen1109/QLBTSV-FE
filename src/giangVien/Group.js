@@ -157,6 +157,15 @@ export default function Group(props) {
         }
     }
 
+    const deleteTopic = (id) => {
+        if(window.confirm("Bạn có chắc muốn xóa topic này ?")){
+            axios.delete(' http://localhost:8080/api/topic/' + id).then(res => {
+                if(res.data !== '') {alert(res.data);}
+                else {getTopic()}
+            })
+        }
+    }
+
      function renderTopicError(){
         if(topicE){
             return(
@@ -246,7 +255,7 @@ export default function Group(props) {
                             <ListItem
                                 key={item.idTopic}
                                 secondaryAction={
-                                    <IconButton edge="end" onClick={() => console.log(item.idTopic)}>
+                                    <IconButton edge="end" onClick={() => deleteTopic(item.idTopic)}>
                                         <DeleteIcon />
                                     </IconButton>
                                 }>
