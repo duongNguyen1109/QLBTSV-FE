@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import SongForm from './components/SongForm';
-import Songs from './components/Songs';
+import ExForm from './components/ExForm';
+import Exs from './components/Exs';
 import { useParams } from 'react-router-dom';
 
 export default function SVUpFile() {
     let { maLop, maBaiTap } = useParams();
-    const [songs, setSongs] = useState([])
+    const [exs, setExs] = useState([])
 
-    const getAllSongs = async () => {
+    const getAllExs = async () => {
         try {
             let url = process.env.REACT_APP_API_URL + "/taiLieuBTLop";
             const taiLieu = await axios.get(url, {
@@ -18,7 +18,7 @@ export default function SVUpFile() {
                     maBT: Number(maBaiTap)
                 }
             });
-            setSongs(taiLieu.data);
+            setExs(taiLieu.data);
             console.log(taiLieu);
         } catch (error) {
             console.log(error)
@@ -26,14 +26,14 @@ export default function SVUpFile() {
     }
 
     useEffect(() => {
-        getAllSongs()
+        getAllExs()
     }, [])
     return (
         <div className="container-backgroud">
-            <SongForm />
-            <div className="songs_container" >
-                {songs.map((song) => (
-                    <Songs song={song} key={song._id} />
+            <ExForm />
+            <div className="exs_container" >
+                {exs.map((ex) => (
+                    <Exs ex={ex} key={ex._id} />
                 )).reverse()}
             </div>
         </div>

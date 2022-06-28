@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 import { useParams } from "react-router-dom";
 import { DateRangeTwoTone } from "@mui/icons-material";
 
-const SongForm = () => {
+const ExForm = () => {
     let { maBaiTap, maLop } = useParams();
     const [data, setData] = useState({
         maBT: maBaiTap,
@@ -74,4 +74,4 @@ const SongForm = () => {
     );
 };
 
-export default SongForm;
+export default ExForm;

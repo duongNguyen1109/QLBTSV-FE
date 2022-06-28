@@ -11,10 +11,11 @@
 .container-backgroud {
 	width: 100vw;
 	min-height: 100vh;
-	background-color: #2f3e7e;
+	background-color: rgb(192, 206, 228);
+	/* background-color: #2f3e7e; */
 }
 
-.songs_container {
+.exs_container {
 	display: grid;
 	grid-template-columns: auto auto auto;
 	grid-gap: 15px;
