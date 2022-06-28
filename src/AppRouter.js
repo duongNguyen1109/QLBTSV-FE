@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Link, Route, Routes, Navigate, useNavigate, Outlet, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Routes, Navigate, useNavigate, Outlet, useParams, useLocation } from "react-router-dom";
 import Login from ".//Login.js";
 import GvHome from "./giangVien/gvHome";
 import Classroom from "./giangVien/Classroom.js";
@@ -17,6 +17,7 @@ import SvHome from "./sinhVien/SvHome.js";
 import ExcerciseDetailSV from "./sinhVien/exerciseDetailSV.js";
 import ListSV from "./admin/components/ListSV.js";
 import SVUpFile from "./sinhVien/svUpfile.js";
+import SearchImage from "./giangVien/searchImage.js";
 
 export default function AppRouter() {
     return (
@@ -40,7 +41,7 @@ export default function AppRouter() {
                     <Route path="" element={<SvHome />}></Route>
                     <Route path="lop/:tenLop/:maLop/:maGV" element={<Classroom />}></Route>
                     <Route path="baiTap/:maBaiTap/:maLop" element={<ExcerciseDetailSV />}></Route>
-                    <Route path = ":maLop/:maBaiTap/upfile" element = {<SVUpFile />}></Route>
+                    <Route path=":maLop/:maBaiTap/upfile" element={<SVUpFile />}></Route>
                 </Route>
 
                 <Route path="/giangvien" element={
@@ -49,6 +50,7 @@ export default function AppRouter() {
                     <Route path="" element={<GvHome />}></Route>
                     <Route path="lop/:tenLop/:maLop/:maMon" element={<Classroom />}></Route>
                     <Route path="baiTap/:maBaiTap" element={<ExcerciseDetail />}></Route>
+                    <Route path="search-img" element={<SearchImage />}></Route>
                 </Route>
                 <Route exact path="/" element={<Login />}>
                 </Route>
@@ -124,7 +126,9 @@ function SinhVien() {
 function GiangVien() {
     let { tenLop, maLop, maMon } = useParams();
     const [userInfo, setUserInfo] = useState([]);
-    const [tab, setTab] = useState('');
+    const [tab, setTab] = useState(0);
+    const [tabHome, setTabHome] = useState(0);
+    let location = useLocation();
     useEffect(() => {
         axios.get(`http://localhost:8080/api/taiKhoan/` + localStorage.getItem("id"))
             .then(response => {
@@ -157,7 +161,25 @@ function GiangVien() {
                             <li class="nav-item">
                                 <a class="nav-link" onClick={() => setTab(2)}>Chia nhóm</a>
                             </li>
-                        </ul> : <ul class="navbar-nav me-auto"></ul>}
+                        </ul> : (location.pathname === "/giangvien" || location.pathname === "/giangvien/search-img") ?
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" onClick={() => {
+                                        if (tabHome !== 0) {
+                                            setTabHome(0);
+                                            history("/giangvien");
+                                        }
+                                    }}>Trang chủ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" onClick={() => {
+                                        if (tabHome !== 1) {
+                                            setTabHome(1);
+                                            history("/giangvien/search-img");
+                                        }
+                                    }}>Tìm kiếm hình ảnh</a>
+                                </li>
+                            </ul> : <ul class="navbar-nav me-auto"></ul>}
 
                         <NavDropdown
                             title={userInfo.hoTen}
@@ -168,7 +190,7 @@ function GiangVien() {
                         </NavDropdown>
                     </div>
                 </div>
-            </nav>
+            </nav >
             {/* <div className="container center" style={{ marginTop: "50px" }}>
                 <select class="form-control" onChange={(e) => handleKyHoc(e.target.value)} >
                     {kyHocList.map((item) => (
@@ -177,7 +199,7 @@ function GiangVien() {
                 </select>
                 <GvHome namHoc={namHoc} ky={ky}></GvHome>
             </div> */}
-            <Outlet context={[tab, setTab]} />
-        </div>
+            < Outlet context={[tab, setTab]} />
+        </div >
     )
 }
