@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 
 export default function ExcerciseDetailSV() {
-    let { maBaiTap, maLop } = useParams();
+    let { maBaiTap, maLop, maMon } = useParams();
     const [baiTap, setBaiTap] = useState('');
     let navigate = useNavigate();
 
@@ -27,7 +27,7 @@ export default function ExcerciseDetailSV() {
             <div className="mb-3" style={{ borderBottom: 'solid 1px black' }}>
                 <p>{baiTap.moTa ? baiTap.moTa : 'Bài tập này hiện chưa có mô tả'}</p>
             </div>
-            <button className="btn btn-primary" onClick={() => navigate(`/sinhvien/${maLop}/${maBaiTap}/upfile`)}>Nộp bài</button>
+            <button className="btn btn-primary" onClick={() => navigate(`/sinhvien/${maLop}/${maBaiTap}/${maMon}/upfile`)}>Nộp bài</button>
         </div>
     )
 }

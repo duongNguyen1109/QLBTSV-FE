@@ -39,9 +39,9 @@ export default function AppRouter() {
                     (localStorage.getItem("user") === "sv") ? <SinhVien /> : <Navigate replace to="/" />
                 }>
                     <Route path="" element={<SvHome />}></Route>
-                    <Route path="lop/:tenLop/:maLop/:maGV" element={<Classroom />}></Route>
-                    <Route path="baiTap/:maBaiTap/:maLop" element={<ExcerciseDetailSV />}></Route>
-                    <Route path=":maLop/:maBaiTap/upfile" element={<SVUpFile />}></Route>
+                    <Route path="lop/:tenLop/:maLop/:maGV/:maMon" element={<Classroom />}></Route>
+                    <Route path="baiTap/:maBaiTap/:maLop/:maMon" element={<ExcerciseDetailSV />}></Route>
+                    <Route path=":maLop/:maBaiTap/:maMon/upfile" element={<SVUpFile />}></Route>
                 </Route>
 
                 <Route path="/giangvien" element={

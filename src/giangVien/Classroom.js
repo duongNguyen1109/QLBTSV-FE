@@ -32,7 +32,7 @@ export default function Classroom() {
 
     const renderTab = () => {
         switch (tab) {
-            case 0: return (<Exercise name={tenLop} maLop={maLop} />);
+            case 0: return (<Exercise name={tenLop} maLop={maLop} maMon = {maMon}/>);
             case 1: return (<Member maLop={maLop} name={userInfo.hoTen} maGV = {maGV} />);
             case 2: return (<Group maLop = {maLop} maMon = {maMon}/>);
         }

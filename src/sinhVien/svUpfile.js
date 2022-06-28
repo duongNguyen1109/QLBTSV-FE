@@ -19,7 +19,6 @@ export default function SVUpFile() {
                 }
             });
             setExs(taiLieu.data);
-            console.log(taiLieu);
         } catch (error) {
             console.log(error)
         }

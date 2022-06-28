@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios';
 import FileInput from "../FileInput";
 import styles from "./styles.module.css";
@@ -6,14 +6,23 @@ import { useParams } from "react-router-dom";
 import { DateRangeTwoTone } from "@mui/icons-material";
 
 const ExForm = () => {
-    let { maBaiTap, maLop } = useParams();
+    let { maBaiTap, maMon } = useParams();
     const [data, setData] = useState({
-        maBT: maBaiTap,
+        maBT: Number(maBaiTap),
         nguoiNop: localStorage.getItem("id"),
         link: "",
         ngayNop: "",
         ghiChu: "",
+        idTopic: ""
     });
+    const [topicList, setTopicList] = useState([]);
+
+    useEffect(() => {
+        axios.get(' http://localhost:8080/api/topicList/' + maMon).then(res => {
+            setTopicList(res.data);
+            setData({ ...data, idTopic: res.data[0].idTopic });
+        })
+    }, []);
 
     const handleChange = ({ currentTarget: input }) => {
         setData({ ...data, [input.name]: input.value });
@@ -27,21 +36,24 @@ const ExForm = () => {
         e.preventDefault();
         try {
             const url = process.env.REACT_APP_API_URL + "/taiLieu";
+            console.log(data);
             const { data: res } = await axios.post(url, data);
             console.log(res);
-            if (res.status === 200) alert("Nộp thành công!");
+            if (res.length > 0) {
+                alert("Nộp thành công!");
+                window.location.reload();
+            };
+
         } catch (error) {
             console.log(error)
             alert(error);
         }
     };
 
-    // let d = new Date();
-    // let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-    // let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
-    // let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-    // let dat = `${ye}-${mo}-${da}`;
-    // console.log(typeof (dat));
+    // const handleTime = () => {
+    //     let d = new Date();
+    //     new Intl.DateTimeFormat('vi', { dateStyle: 'short', timeStyle: 'long' }).format(date)
+    // }
 
     return (
         <div className={styles.container}>
@@ -62,9 +74,19 @@ const ExForm = () => {
                     onChange={handleChange}
                     value={data.ghiChu}
                 />
+                <select
+                    className={styles.input}
+                    placeholder="Topic"
+                    name="idTopic"
+                    onChange={handleChange}
+                    value={data.idTopic}>
+                    {topicList.map(item => (
+                        <option value={item.idTopic}> {item.ten}</option>
+                    ))}
+                </select>
                 <button type="submit" className={styles.submit_btn} onClick={() => {
                     const date = new Date();
-                    setData({ ...data, ngayNop: date.toISOString() });
+                    setData({ ...data, ngayNop: new Intl.DateTimeFormat('vi', { dateStyle: 'short', timeStyle: 'long' }).format(date) });
                     console.log(data);
                 }} >
                     Nộp

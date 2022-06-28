@@ -71,7 +71,7 @@ export default function SvHome(props) {
 function LopItem(props) {
     return (
         <div class="card" style={{ width: '300px',margin: "20px" }}>
-            <div class="card-header"><Link to = {`lop/${props.name}/${props.maLop}/${props.maGV}`}><h5>{props.name}</h5></Link></div>
+            <div class="card-header"><Link to = {`lop/${props.name}/${props.maLop}/${props.maGV}/${props.maMon}`}><h5>{props.name}</h5></Link></div>
             <div class="card-body">
                 <p>{`Mã môn: ${props.maMon}`}</p>
                 <p>{`Giảng viên: ${props.tenGV}`}</p>

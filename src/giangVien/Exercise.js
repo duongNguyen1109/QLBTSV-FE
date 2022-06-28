@@ -94,7 +94,7 @@ export default function Exercise(props) {
                 </div>
                 <div className='col-sm-9 d-flex flex-column'>
                     {listBT.map((item) => (
-                        <ExerciseItem bt={item} maLop = {props.maLop}></ExerciseItem>
+                        <ExerciseItem bt={item} maLop = {props.maLop} maMon = {props.maMon}></ExerciseItem>
                     ))}
                 </div>
             </div>
@@ -199,7 +199,7 @@ function ExerciseItem(props) {
             if (localStorage.getItem("user") === "gv") {
                 navigate("/giangvien/baiTap/" + props.bt.maBT);
             } else {
-                navigate("/sinhvien/baiTap/" + props.bt.maBT + "/" + props.maLop);
+                navigate("/sinhvien/baiTap/" + props.bt.maBT + "/" + props.maLop + "/" + props.maMon);
             }
         }}>
             <span className='dot'></span>
