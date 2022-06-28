@@ -58,11 +58,6 @@ const AddSV = () => {
         });
         if (res.status === 200) {
             if(res.data.length > 0){
-                // const created = await axios.post("http://localhost:8080/api/svLop", data);
-                // if(created.status === 200){
-                //     // console.log(created.data);
-                // }
-            // } else {
                 toast.error('Đã có trong danh sách lớp', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500});
                 check = 0;
             }

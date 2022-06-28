@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
 import '../style/AddTK.css';
@@ -26,41 +26,41 @@ const AddTK = () => {
 
     let a = state.loaiTK;
 
-    const {ma} = useParams();
+    const { ma } = useParams();
 
     useEffect(() => {
-        if(ma){
+        if (ma) {
             getSingleTK(ma);
         }
     }, [ma])
 
     const getSingleTK = async (ma) => {
         const response = await axios.get(`http://localhost:8080/api/taiKhoan/${ma}`);
-            if (response.status === 200) {
-                setState({...response.data[0]});
+        if (response.status === 200) {
+            setState({ ...response.data[0] });
 
-            }
+        }
     }
 
     // const { ma, hoTen, SDT, email, diaChi, ngaySinh, loaiTK, khoa, lop, khoaHoc } = initialState;
 
     const addTaiKhoan = async (data) => {
         const response = await axios.post("http://localhost:8080/api/taiKhoan", data);
-            if (response.status === 200) {
-                toast.success('Tạo mới thành công', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1500);
-            }
+        if (response.status === 200) {
+            toast.success('Tạo mới thành công', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+        }
     };
 
     const updateTaiKhoan = async (data, ma) => {
         const response = await axios.put(`http://localhost:8080/api/taiKhoan/${ma}`, data);
-            if (response.status === 200) {
-                toast.success('Cập nhật thành công', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
-                navigate(`/admin/taiKhoan`);
-                setState(initialState);
-            }
+        if (response.status === 200) {
+            toast.success('Cập nhật thành công', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
+            navigate(`/admin/taiKhoan`);
+            setState(initialState);
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -74,11 +74,13 @@ const AddTK = () => {
                     // console.log(state[key]);
                     check = 0;
                 }
-                const a = await axios.get(`http://localhost:8080/api/taiKhoan/${state[key]}`);
-                console.log(a);
-                if(a.data.length > 0){
-                    toast.error('Tài khoản đã tồn tại', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
-                    check = 0;
+                if (!ma) {
+                    const a = await axios.get(`http://localhost:8080/api/taiKhoan/${state[key]}`);
+                    console.log(a);
+                    if (a.data.length > 0) {
+                        toast.error('Tài khoản đã tồn tại', { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
+                        check = 0;
+                    }
                 }
             } else if (key === "hoTen") {
                 if (state[key] === "") {
@@ -106,14 +108,14 @@ const AddTK = () => {
         }
 
         if (check === 1) {
-            if(!ma){
+            if (!ma) {
                 addTaiKhoan(state);
             } else {
                 updateTaiKhoan(state, ma);
             }
-            
+
         }
-        
+
     };
 
     const handleInputChange = (e) => {
@@ -127,7 +129,7 @@ const AddTK = () => {
         } else if (name === "hoTen") {
             value = value.replace(/[&#,+()$~%.'":*?<>{}]/g, '');
             setState({ ...state, [name]: value });
-        } 
+        }
         else if (name === "SDT") {
             value = value.replace(/[^0-9]/g, '');
             setState({ ...state, [name]: value });

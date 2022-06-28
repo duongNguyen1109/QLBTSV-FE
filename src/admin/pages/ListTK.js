@@ -39,6 +39,7 @@ const ListTK = () => {
 
         if (window.confirm(`Bạn có muốn xóa tài khoản ${name} không?`)) {
             const response = await axios.delete(`http://localhost:8080/api/taiKhoan/${ma}`);
+            console.log(response);
             if (response.status === 200) {
                 toast.success(`Đã xóa tài khoản ${name}`, { position: toast.POSITION.TOP_RIGHT, autoClose: 1500 });
                 navigate(`/admin/taiKhoan`);
