@@ -13,7 +13,7 @@ export default function Login() {
     let adminLogin = () => {
         localStorage.setItem("user", "admin");
         localStorage.setItem("id", username);
-        console.log(localStorage.getItem("id"));
+        console.log(localStorage.getItem("id"), 'admin login');
         console.log("admin");
         history("/admin");
     }
@@ -55,6 +55,10 @@ export default function Login() {
         .catch(console.log)
       };
 
+    // function navigatePage() {
+    //     history('/admin');
+    // }
+
     return (
         <section className="vh-100" style={{backgroundColor: `rgb(32, 59, 135)`}}>
             <div className="container h-100">
@@ -69,30 +73,32 @@ export default function Login() {
                                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                     <div className="card-body p-4 p-lg-5 text-black">
 
-                                        <form onSubmit={handleLogin}>
+                                        <form>
                                             <div className="d-flex align-items-center mb-3 pb-1">
                                                 <span className="h1 fw-bold mb-0" style= {{color: `rgb(1, 15, 138)`}} >Đăng nhập</span>
                                             </div>
                                             <div className="form-outline mb-4">
                                                 <label className="form-label">Username</label>
                                                 <input type="text" id="username" name="username"
+                                                value = {username}
                                                     className="form-control form-control-lg" onChange = {(e)=>{
                                                         setName(e.target.value)
-                                                    }} required />
+                                                    }}/>
                                                 <span className="error" style={{color: `red`}}></span>
                                             </div>
 
                                             <div className="form-outline mb-4">
                                                 <label className="form-label">Password</label>
                                                 <input type="password" id="pass" name="pass"
+                                                value={password}
                                                     className="form-control form-control-lg" onChange = {(e)=>{
                                                         setPass(e.target.value)
-                                                    }} required />
+                                                    }} />
                                                 <span className="error" style={{color: `red`}}></span>
                                             </div>
 
                                             <div className="pt-1 mb-4">
-                                                <button className="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                                <button className="btn btn-dark btn-lg" type="button" onClick={handleLogin}>Login</button>
                                             </div>
                                         </form>
 

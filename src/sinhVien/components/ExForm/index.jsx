@@ -41,7 +41,7 @@ const ExForm = () => {
             console.log(res);
             if (res.length > 0) {
                 alert("Nộp thành công!");
-                window.location.reload();
+                // window.location.reload();
             };
 
         } catch (error) {
@@ -86,7 +86,7 @@ const ExForm = () => {
                 </select>
                 <button type="submit" className={styles.submit_btn} onClick={() => {
                     const date = new Date();
-                    setData({ ...data, ngayNop: new Intl.DateTimeFormat('vi', { dateStyle: 'short', timeStyle: 'long' }).format(date) });
+                    setData({ ...data, ngayNop: date.toUTCString() });
                     console.log(data);
                 }} >
                     Nộp

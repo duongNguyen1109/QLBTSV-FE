@@ -19,13 +19,21 @@ import ListSV from "./admin/components/ListSV.js";
 import SVUpFile from "./sinhVien/svUpfile.js";
 import SearchImage from "./giangVien/searchImage.js";
 
+function PrivateRoute({ component, redirectTo, role, ...props }) {
+    const user = localStorage.getItem('user');
+    if (!user === role) {
+        return <Navigate to={redirectTo} />
+    } else {
+        return component;
+    }
+}
+
 export default function AppRouter() {
     return (
         <Router>
             <Routes>
-                <Route path="/admin" element={
-                    (localStorage.getItem("user") === "admin") ? <Admin /> : <Navigate replace to="/" />
-                }>
+
+                <Route path='admin' element={<PrivateRoute redirectTo={'/'} component={<Admin />} role='admin' />}>
                     <Route path="taiKhoan" element={<ListTK />} exact />
                     <Route exact path="mon" element={<ListMon />} />
                     <Route exact path="lop" element={<ListLop />} />
@@ -35,18 +43,15 @@ export default function AppRouter() {
                     <Route path='lop/addSV/:maLop' element={<AddSV />} />
                 </Route>
 
-                <Route path="/sinhvien" element={
-                    (localStorage.getItem("user") === "sv") ? <SinhVien /> : <Navigate replace to="/" />
-                }>
+                <Route path="/sinhvien" element={<PrivateRoute redirectTo='/' component={<SinhVien />} role='sv' />}>
                     <Route path="" element={<SvHome />}></Route>
                     <Route path="lop/:tenLop/:maLop/:maGV/:maMon" element={<Classroom />}></Route>
                     <Route path="baiTap/:maBaiTap/:maLop/:maMon" element={<ExcerciseDetailSV />}></Route>
                     <Route path=":maLop/:maBaiTap/:maMon/upfile" element={<SVUpFile />}></Route>
                 </Route>
 
-                <Route path="/giangvien" element={
-                    (localStorage.getItem("user") === "gv") ? <GiangVien /> : <Navigate replace to="/" />
-                }>
+
+                <Route path="/giangvien" element={<PrivateRoute redirectTo={'/'} component = {<GiangVien />} role = 'gv'/>}>
                     <Route path="" element={<GvHome />}></Route>
                     <Route path="lop/:tenLop/:maLop/:maMon" element={<Classroom />}></Route>
                     <Route path="baiTap/:maBaiTap" element={<ExcerciseDetail />}></Route>
@@ -58,13 +63,7 @@ export default function AppRouter() {
         </Router >
     )
 }
-// function Abc() {
-//     console.log(localStorage.getItem("admin"));
-//     if (localStorage.getItem("admin")) return <Admin />
-//     else return <Navigate to="/" />
-// }
 function Admin() {
-    // console.log(localStorage.getItem("admin"));
     return (
         <div className='App'>
             <Header />
@@ -191,14 +190,6 @@ function GiangVien() {
                     </div>
                 </div>
             </nav >
-            {/* <div className="container center" style={{ marginTop: "50px" }}>
-                <select class="form-control" onChange={(e) => handleKyHoc(e.target.value)} >
-                    {kyHocList.map((item) => (
-                        <option value={item.namHoc + "/" + item.ky} >Năm {item.namHoc} kỳ {item.ky}</option>
-                    ))}
-                </select>
-                <GvHome namHoc={namHoc} ky={ky}></GvHome>
-            </div> */}
             < Outlet context={[tab, setTab]} />
         </div >
     )
